@@ -1,0 +1,46 @@
+<div class="ilunch-schedule">
+  <h1>{{title}}</h1>
+
+  <!--<p *ngIf="this.id && !courseInfo"><em>Loading...</em></p>-->
+
+  <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div *ngFor="let schoolDay of schoolDays">
+      <mat-form-field class="course-chip-list" appearance="fill">
+        <mat-label><H5>{{schoolDayLabels[schoolDay]}}:</H5></mat-label>
+        <br />
+        <mat-chip-list #chipList [formControl]="formControls[schoolDay]">
+          <mat-chip #chip="matChip" (click)="chip.toggleSelected(true)"
+                    *ngFor="let lunchOption of lunchOptions"
+                    [selected]="lunchOption"
+                    [value]="lunchOption">
+            {{lunchOption}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group commands">
+      <button *ngIf="id && bIsEditingSchedule" type="submit"
+              (click)="onSubmit()"
+              class="btn btn-success">
+        Save
+      </button>
+      <button *ngIf="!id && bIsEditingSchedule" type="submit"
+              (click)="onSubmit()"
+              class="btn btn-success">
+        Create
+      </button>
+      <button *ngIf="bIsEditingSchedule" type="submit"
+              (click)="onCancel()"
+              class="btn">
+        Cancel
+      </button>
+      <button *ngIf="!bIsEditingSchedule" type="submit" 
+              (click)="onStartEditing()"
+              class="btn btn-success">
+        Edit
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="course-blocks-edit">
+  <h1>{{title}}</h1>
+
+  <p *ngIf="this.id && !courseInfo"><em>Loading...</em></p>
+
+  <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div *ngIf="form.invalid && form.errors && form.errors?.isDupeCourse"
+         class="alert alert-danger">
+      <strong>ERROR</strong>:
+      A course with the same <i>Title</i> and <i>Room</i> already exists!!!
+    </div>
+
+    <div class="form-group">
+      <label for="title">Course Title:</label>
+      <br />
+      <input type="text" id="title"
+             formControlName="title" required
+             placeholder="Course title..."
+             class="form-control" />
+
+      <div *ngIf="form.get('title').invalid &&
+                 (form.get('title').dirty || form.get('title').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('title').errors?.required">
+          Course title is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="room">Room:</label>
+      <br />
+      <input type="text" id="room"
+             formControlName="room" required
+             placeholder="Room..."
+             class="form-control" />
+
+      <div *ngIf="form.get('room').invalid &&
+                 (form.get('room').dirty || form.get('room').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('room').errors?.required">
+          Room is required.
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="blocks">Selected Blocks:</label>
+      <br />
+      <input type="text" id="blocks" readonly value="{{formChipControl.value}}"
+             formControlName="blocks" 
+             placeholder="Selected blocks..."
+             class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="blockoptions">Block Options:</label>
+      <br />
+      <mat-chip-list #chipList multiple [formControl]="formChipControl">
+        <mat-chip #chip="matChip" (click)="chip.toggleSelected(true)" 
+                  *ngFor="let option of candidateBlocks"
+                  [value]="option"
+                  [selected]="option"
+                  >
+          {{option}}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+
+    <div class="form-group commands">
+      <button *ngIf="id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Save
+      </button>
+      <button *ngIf="id" type="submit"
+              (click)="onDelete()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Delete
+      </button>
+      <button *ngIf="!id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Create
+      </button>
+      <button type="button"
+              [routerLink]="['/courseblocks']"
+              class="btn">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
