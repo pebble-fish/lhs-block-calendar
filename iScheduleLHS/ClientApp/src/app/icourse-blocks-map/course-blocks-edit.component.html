@@ -73,19 +73,24 @@
       <button *ngIf="id" type="submit"
               (click)="onSubmit()"
               [disabled]="form.invalid"
-              class="btn btn-success">
+              class="btn btn-success"
+              style=" padding-left: 10px; padding-right: 10px; "
+              margin-right="10px">
         Save
       </button>
+      &nbsp;
       <button *ngIf="id" type="submit"
               (click)="onDelete()"
               [disabled]="form.invalid"
-              class="btn btn-success">
+              class="btn btn-success"
+              style=" padding-left: 10px; padding-right: 10px; ">
         Delete
       </button>
       <button *ngIf="!id" type="submit"
               (click)="onSubmit()"
               [disabled]="form.invalid"
-              class="btn btn-success">
+              class="btn btn-success"
+              style=" padding-left: 10px; padding-right: 10px; ">
         Create
       </button>
       <button type="button"

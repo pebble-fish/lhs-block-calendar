@@ -15,3 +15,7 @@ input.ng-invalid ~ .invalid-feedback {
 .course-chip-list {
   width: 100%;
 }
+
+button {
+  padding: 5px initial;
+}
