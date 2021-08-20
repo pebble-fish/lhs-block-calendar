@@ -45,7 +45,7 @@ export class IlunchScheduleComponent implements OnInit {
   //course title can repeat - such as study hall
   ngOnInit() {
 
-    this.title = "Create your lunch schedule";
+    this.title = "Input Lunches";
 
     this.formControls = [new FormControl(['']), new FormControl(['']),
     new FormControl(['']), new FormControl(['']), new FormControl(['']),
@@ -77,7 +77,7 @@ export class IlunchScheduleComponent implements OnInit {
         this.id = this.lunchSchedule.id;
 
         //get existing lunch schedule from server
-        this.title = "Edit your lunch schedule";
+        this.title = "Edit Lunches";
 
         //select blocks associated with course already
         var blocks2Select = this.lunchSchedule.schedules.split(",");
